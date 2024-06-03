@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import pe.edu.upc.center.platform.learning.domain.model.events.TutorialCompletedEvent;
 import pe.edu.upc.center.platform.learning.domain.model.valueobjects.ProgressRecord;
-import pe.edu.upc.center.platform.learning.domain.model.valueobjects.AcmeStudentRecordId;
+import pe.edu.upc.center.platform.learning.domain.model.valueobjects.StudentRecordId;
 import pe.edu.upc.center.platform.learning.domain.model.valueobjects.EnrollmentStatus;
 import pe.edu.upc.center.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
@@ -20,7 +20,7 @@ public class Enrollment extends AuditableAbstractAggregateRoot<Enrollment> {
 
   @Getter
   @Embedded
-  private AcmeStudentRecordId acmeStudentRecordId;
+  private StudentRecordId studentRecordId;
 
   @Getter
   @ManyToOne
@@ -39,8 +39,8 @@ public class Enrollment extends AuditableAbstractAggregateRoot<Enrollment> {
   public Enrollment() {
   }
 
-  public Enrollment(AcmeStudentRecordId studentRecordId, Course course) {
-    this.acmeStudentRecordId = studentRecordId;
+  public Enrollment(StudentRecordId studentRecordId, Course course) {
+    this.studentRecordId = studentRecordId;
     this.course = course;
     this.status = EnrollmentStatus.REQUESTED;
     this.progressRecord = new ProgressRecord();

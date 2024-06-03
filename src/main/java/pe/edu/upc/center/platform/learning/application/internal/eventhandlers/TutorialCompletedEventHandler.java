@@ -43,7 +43,7 @@ public class TutorialCompletedEventHandler {
     var enrollment = enrollmentQueryService.handle(getEnrollmentByIdQuery);
     if (enrollment.isPresent()) {
       // Update student metrics on tutorial completed
-      var updateStudentMetricsOnTutorialCompletedCommand = new UpdateStudentMetricsOnTutorialCompletedCommand(enrollment.get().getAcmeStudentRecordId());
+      var updateStudentMetricsOnTutorialCompletedCommand = new UpdateStudentMetricsOnTutorialCompletedCommand(enrollment.get().getStudentRecordId());
       studentCommandService.handle(updateStudentMetricsOnTutorialCompletedCommand);
     }
     System.out.println("TutorialCompletedEventHandler executed");

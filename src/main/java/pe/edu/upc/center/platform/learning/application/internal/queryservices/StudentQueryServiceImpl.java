@@ -2,7 +2,7 @@ package pe.edu.upc.center.platform.learning.application.internal.queryservices;
 
 import org.springframework.stereotype.Service;
 import pe.edu.upc.center.platform.learning.domain.model.aggregates.Student;
-import pe.edu.upc.center.platform.learning.domain.model.queries.GetStudentByAcmeStudentRecordIdQuery;
+import pe.edu.upc.center.platform.learning.domain.model.queries.GetStudentByStudentRecordIdQuery;
 import pe.edu.upc.center.platform.learning.domain.model.queries.GetStudentByProfileIdQuery;
 import pe.edu.upc.center.platform.learning.domain.services.StudentQueryService;
 import pe.edu.upc.center.platform.learning.infrastructure.persistence.jpa.repositories.StudentRepository;
@@ -39,7 +39,7 @@ public class StudentQueryServiceImpl implements StudentQueryService {
   }
 
   @Override
-  public Optional<Student> handle(GetStudentByAcmeStudentRecordIdQuery query) {
-    return studentRepository.findByAcmeStudentRecordId(query.acmeStudentRecordId());
+  public Optional<Student> handle(GetStudentByStudentRecordIdQuery query) {
+    return studentRepository.findByStudentRecordId(query.studentRecordId());
   }
 }

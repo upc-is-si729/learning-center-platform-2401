@@ -1,6 +1,6 @@
 package pe.edu.upc.center.platform.learning.domain.model.commands;
 
-import pe.edu.upc.center.platform.learning.domain.model.valueobjects.AcmeStudentRecordId;
+import pe.edu.upc.center.platform.learning.domain.model.valueobjects.StudentRecordId;
 
-public record RequestEnrollmentCommand(AcmeStudentRecordId studentRecordId, Long courseId) {
+public record RequestEnrollmentCommand(StudentRecordId studentRecordId, Long courseId) {
 }

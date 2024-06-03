@@ -1,7 +1,7 @@
-# ACME Learning Center Platform
+# Learning Center Platform
 
 ## Summary
-ACME Learning Center Platform, illustrating development with Java, Spring Boot Framework, and Spring Data JPA on MySQL Database. It also illustrates open-api documentation configuration and integration with Swagger UI. 
+ACME Learning Center Platform, illustrating development with Java, Spring Boot Framework, and Spring Data JPA on PostgreSql Database. It also illustrates open-api documentation configuration and integration with Swagger UI. 
 
 ## Features
 - RESTful API
@@ -14,7 +14,7 @@ ACME Learning Center Platform, illustrating development with Java, Spring Boot F
 - Domain-Driven Design
 
 ## Bounded Contexts
-This version of ACME Learning Center Platform is divided into two bounded contexts: Profiles, and Learning.
+This version of Learning Center Platform is divided into two bounded contexts: Profiles, and Learning.
 
 ### Profiles Context
 
@@ -75,3 +75,6 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
+### Swagger UI
+
+Use this url http://localhost:8090/swagger-ui/index.html for execute the API.

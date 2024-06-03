@@ -3,13 +3,13 @@ package pe.edu.upc.center.platform.learning.infrastructure.persistence.jpa.repos
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.center.platform.learning.domain.model.aggregates.Student;
-import pe.edu.upc.center.platform.learning.domain.model.valueobjects.AcmeStudentRecordId;
+import pe.edu.upc.center.platform.learning.domain.model.valueobjects.StudentRecordId;
 import pe.edu.upc.center.platform.learning.domain.model.valueobjects.ProfileId;
 
 import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-  Optional<Student> findByAcmeStudentRecordId(AcmeStudentRecordId studentRecordId);
+  Optional<Student> findByStudentRecordId(StudentRecordId studentRecordId);
   Optional<Student> findByProfileId(ProfileId profileId);
 }

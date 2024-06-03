@@ -32,11 +32,11 @@ public class EnrollmentQueryServiceImpl implements EnrollmentQueryService {
    * @param query containing studentRecordId
    * @return List of Enrollments
    * @see Enrollment
-   * @see GetAllEnrollmentsByAcmeStudentRecordIdQuery
+   * @see GetAllEnrollmentsByStudentRecordIdQuery
    */
   @Override
-  public List<Enrollment> handle(GetAllEnrollmentsByAcmeStudentRecordIdQuery query) {
-    return enrollmentRepository.findAllByAcmeStudentRecordId(query.studentRecordId());
+  public List<Enrollment> handle(GetAllEnrollmentsByStudentRecordIdQuery query) {
+    return enrollmentRepository.findAllByStudentRecordId(query.studentRecordId());
   }
 
   /**
@@ -79,7 +79,7 @@ public class EnrollmentQueryServiceImpl implements EnrollmentQueryService {
   }
 
   @Override
-  public Optional<Enrollment> handle(GetEnrollmentByAcmeStudentRecordIdAndCourseIdQuery query) {
-    return enrollmentRepository.findByAcmeStudentRecordIdAndCourseId(query.acmeStudentRecordId(), query.courseId());
+  public Optional<Enrollment> handle(GetEnrollmentByStudentRecordIdAndCourseIdQuery query) {
+    return enrollmentRepository.findByStudentRecordIdAndCourseId(query.studentRecordId(), query.courseId());
   }
 }
