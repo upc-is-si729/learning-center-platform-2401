@@ -60,8 +60,8 @@ public class EnrollmentsController {
     var command = RequestEnrollmentCommandFromResourceAssembler.toCommandFromResource(resource);
     var enrollmentId = enrollmentCommandService.handle(command);
     System.out.println("Enrollment ID: " + enrollmentId);
-    var getEnrollmentByAcmeStudentRecordIdAndCourseIdQuery = new GetEnrollmentByStudentRecordIdAndCourseIdQuery(new StudentRecordId(resource.studentId()), resource.courseId());
-    var enrollment = enrollmentQueryService.handle(getEnrollmentByAcmeStudentRecordIdAndCourseIdQuery);
+    var getEnrollmentByStudentRecordIdAndCourseIdQuery = new GetEnrollmentByStudentRecordIdAndCourseIdQuery(new StudentRecordId(resource.studentId()), resource.courseId());
+    var enrollment = enrollmentQueryService.handle(getEnrollmentByStudentRecordIdAndCourseIdQuery);
 
     if (enrollment.isEmpty()) {
       return ResponseEntity.notFound().build();

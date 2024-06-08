@@ -50,8 +50,8 @@ public class StudentEnrollmentsController {
   @GetMapping
   public ResponseEntity<List<EnrollmentResource>> getEnrollmentsForStudentWithStudentRecordId(@PathVariable String studentRecordId) {
     var studentRecordIdVar = new StudentRecordId(studentRecordId);
-    var getAllEnrollmentsByAcmeStudentRecordIdQuery = new GetAllEnrollmentsByStudentRecordIdQuery(studentRecordIdVar);
-    var enrollments = enrollmentQueryService.handle(getAllEnrollmentsByAcmeStudentRecordIdQuery);
+    var getAllEnrollmentsByStudentRecordIdQuery = new GetAllEnrollmentsByStudentRecordIdQuery(studentRecordIdVar);
+    var enrollments = enrollmentQueryService.handle(getAllEnrollmentsByStudentRecordIdQuery);
     var enrollmentResources = enrollments.stream().map(EnrollmentResourceFromEntityAssembler::toResourceFromEntity).toList();
     return ResponseEntity.ok(enrollmentResources);
   }

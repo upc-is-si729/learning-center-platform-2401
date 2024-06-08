@@ -1,7 +1,7 @@
 # Learning Center Platform
 
 ## Summary
-ACME Learning Center Platform, illustrating development with Java, Spring Boot Framework, and Spring Data JPA on PostgreSql Database. It also illustrates open-api documentation configuration and integration with Swagger UI. 
+Learning Center Platform, illustrating development with Java, Spring Boot Framework, and Spring Data JPA on MySQL Database. It also illustrates open-api documentation configuration and integration with Swagger UI.
 
 ## Features
 - RESTful API
@@ -14,7 +14,7 @@ ACME Learning Center Platform, illustrating development with Java, Spring Boot F
 - Domain-Driven Design
 
 ## Bounded Contexts
-This version of Learning Center Platform is divided into two bounded contexts: Profiles, and Learning.
+This version of Learning Center Platform is divided into three bounded contexts: Profiles, Learning, and IAM.
 
 ### Profiles Context
 
@@ -52,6 +52,28 @@ This context includes also an anti-corruption layer to communicate with the Prof
 
 Tutorial is a concept that represents a learning resource. It is used to build the learning path of a course. The Tutorial aggregate and its publishing lifecycle are part of the Publishing bounded context, which is beyond the scope of this platform version.
 
+### Identity and Access Management (IAM) Context
+
+The IAM Context is responsible for managing platform users, including the sign in and sign up processes. It applies JSON Web Token based authorization and Password hashing. It also adds a request authorization middleware to Spring Boot Pipeline, in order to validate included token in request header on endpoints that require authorization. Its capabilities include:
+- Create a new User (Sign Up).
+- Authenticate a User (Sign In).
+- Get a User by ID.
+- Get All Users.
+- Get All Roles.
+- Use Spring Security features to implement an authorization pipeline based on request filtering.
+- Generate and validate JSON Web Tokens.
+- Apply Password hashing.
+
+This version implements the following roles: Admin, Instructor, and Student. The roles are used to manage the access to the platform features. The Admin role has access to all features, the Instructor and Student roles should have access according to business rules.
+
+This context includes also an anti-corruption layer. The anti-corruption layer is responsible for managing the communication between the IAM Context and other bounded Contexts. Its capabilities include:
+
+- Create a new User, returning ID of the created User on success. If roles are provided, it will also assign them to the user, otherwise the default role is assigned.
+- Get a User by ID, returning the associated User ID on success.
+- Get a User by Username, returning the associated User ID on success.
+
+- In this version, Open API documentation includes support for JSON Web Token based authorization.
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
@@ -74,6 +96,8 @@ The following guides illustrate how to use some features concretely:
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
+
+
 
 ### Swagger UI
 
