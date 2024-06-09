@@ -5,7 +5,7 @@ import pe.edu.upc.center.platform.profiles.interfaces.rest.resources.ProfileReso
 
 public class ProfileResourceFromEntityAssembler {
   public static ProfileResource toResourceFromEntity(Profile entity) {
-    return new ProfileResource(entity.getId(), entity.getEmailAddress(), entity.getFullName(),
-            entity.getStreetAddress());
+    return new ProfileResource(entity.getId(), entity.getEmailAddress(),
+        entity.getFullName(), entity.getStreetAddress());
   }
 }

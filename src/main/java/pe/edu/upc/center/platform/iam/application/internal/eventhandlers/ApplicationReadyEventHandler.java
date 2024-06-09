@@ -17,7 +17,8 @@ import java.sql.Timestamp;
 @Service
 public class ApplicationReadyEventHandler {
   private final RoleCommandService roleCommandService;
-  private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventHandler.class);
+  private static final Logger LOGGER
+      = LoggerFactory.getLogger(ApplicationReadyEventHandler.class);
 
   public ApplicationReadyEventHandler(RoleCommandService roleCommandService) {
     this.roleCommandService = roleCommandService;
@@ -31,10 +32,13 @@ public class ApplicationReadyEventHandler {
   @EventListener
   public void on(ApplicationReadyEvent event) {
     var applicationName = event.getApplicationContext().getId();
-    LOGGER.info("Starting to verify if roles seeding is needed for {} at {}", applicationName, currentTimestamp());
+    LOGGER.info("Starting to verify if roles seeding is needed for {} at {}",
+        applicationName, currentTimestamp());
+
     var seedRolesCommand = new SeedRolesCommand();
     roleCommandService.handle(seedRolesCommand);
-    LOGGER.info("Roles seeding verification finished for {} at {}", applicationName, currentTimestamp());
+    LOGGER.info("Roles seeding verification finished for {} at {}",
+        applicationName, currentTimestamp());
   }
 
   private Timestamp currentTimestamp() {

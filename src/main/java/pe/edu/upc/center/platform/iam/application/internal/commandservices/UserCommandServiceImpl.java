@@ -29,7 +29,9 @@ public class UserCommandServiceImpl implements UserCommandService {
 
   private final RoleRepository roleRepository;
 
-  public UserCommandServiceImpl(UserRepository userRepository, HashingService hashingService, TokenService tokenService, RoleRepository roleRepository) {
+  public UserCommandServiceImpl(UserRepository userRepository, HashingService hashingService,
+      TokenService tokenService, RoleRepository roleRepository) {
+
     this.userRepository = userRepository;
     this.hashingService = hashingService;
     this.tokenService = tokenService;
@@ -52,6 +54,7 @@ public class UserCommandServiceImpl implements UserCommandService {
       throw new RuntimeException("User not found");
     if (!hashingService.matches(command.password(), user.get().getPassword()))
       throw new RuntimeException("Invalid password");
+
     var token = tokenService.generateToken(user.get().getUsername());
     return Optional.of(ImmutablePair.of(user.get(), token));
   }
@@ -69,10 +72,10 @@ public class UserCommandServiceImpl implements UserCommandService {
     if (userRepository.existsByUsername(command.username()))
       throw new RuntimeException("Username already exists");
     var roles = command.roles().stream()
-            .map(role -> roleRepository
-                    .findByName(role.getName())
-                    .orElseThrow(() -> new RuntimeException("Role name not found")))
-            .toList();
+        .map(role ->
+            roleRepository.findByName(role.getName())
+                .orElseThrow(() -> new RuntimeException("Role name not found")))
+        .toList();
     var user = new User(command.username(), hashingService.encode(command.password()), roles);
     userRepository.save(user);
     return userRepository.findByUsername(command.username());

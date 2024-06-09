@@ -1,6 +1,7 @@
 package pe.edu.upc.center.platform.iam.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,6 @@ import pe.edu.upc.center.platform.iam.domain.model.queries.GetUserByIdQuery;
 import pe.edu.upc.center.platform.iam.domain.services.UserQueryService;
 import pe.edu.upc.center.platform.iam.interfaces.rest.resources.UserResource;
 import pe.edu.upc.center.platform.iam.interfaces.rest.transform.UserResourceFromEntityAssembler;
-
-import java.util.List;
 
 /**
  * This class is a REST controller that exposes the users resource.
@@ -34,20 +33,24 @@ public class UsersController {
 
   /**
    * This method returns all the users.
-   * @return a list of user resources
+   *
+   * @return a list of user resources.
    * @see UserResource
    */
   @GetMapping
   public ResponseEntity<List<UserResource>> getAllUsers() {
     var getAllUsersQuery = new GetAllUsersQuery();
     var users = userQueryService.handle(getAllUsersQuery);
-    var userResources = users.stream().map(UserResourceFromEntityAssembler::toResourceFromEntity).toList();
+    var userResources = users.stream()
+        .map(UserResourceFromEntityAssembler::toResourceFromEntity)
+        .toList();
     return ResponseEntity.ok(userResources);
   }
 
   /**
    * This method returns the user with the given id.
-   * @param userId the user id
+   *
+   * @param userId the user id.
    * @return the user resource with the given id
    * @throws RuntimeException if the user is not found
    * @see UserResource

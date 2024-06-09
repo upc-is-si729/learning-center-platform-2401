@@ -31,7 +31,9 @@ public class ProfilesController {
   private final ProfileQueryService profileQueryService;
   private final ProfileCommandService profileCommandService;
 
-  public ProfilesController(ProfileQueryService profileQueryService, ProfileCommandService profileCommandService) {
+  public ProfilesController(ProfileQueryService profileQueryService,
+      ProfileCommandService profileCommandService) {
+
     this.profileQueryService = profileQueryService;
     this.profileCommandService = profileCommandService;
   }
@@ -42,8 +44,11 @@ public class ProfilesController {
    * @return the created Profile
    */
   @PostMapping
-  public ResponseEntity<ProfileResource> createProfile(@RequestBody CreateProfileResource resource) {
-    var createProfileCommand = CreateProfileCommandFromResourceAssembler.toCommandFromResource(resource);
+  public ResponseEntity<ProfileResource> createProfile(
+      @RequestBody CreateProfileResource resource) {
+
+    var createProfileCommand = CreateProfileCommandFromResourceAssembler
+        .toCommandFromResource(resource);
     var profile = profileCommandService.handle(createProfileCommand);
     if (profile.isEmpty())
       return ResponseEntity.badRequest().build();
@@ -74,7 +79,9 @@ public class ProfilesController {
   public ResponseEntity<List<ProfileResource>> getAllProfiles() {
     var getAllProfilesQuery = new GetAllProfilesQuery();
     var profiles = profileQueryService.handle(getAllProfilesQuery);
-    var profileResources = profiles.stream().map(ProfileResourceFromEntityAssembler::toResourceFromEntity).collect(Collectors.toList());
+    var profileResources = profiles.stream()
+        .map(ProfileResourceFromEntityAssembler::toResourceFromEntity)
+        .collect(Collectors.toList());
     return ResponseEntity.ok(profileResources);
   }
 }

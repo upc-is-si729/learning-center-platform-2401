@@ -1,6 +1,7 @@
 package pe.edu.upc.center.platform.iam.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +11,6 @@ import pe.edu.upc.center.platform.iam.domain.model.queries.GetAllRolesQuery;
 import pe.edu.upc.center.platform.iam.domain.services.RoleQueryService;
 import pe.edu.upc.center.platform.iam.interfaces.rest.resources.RoleResource;
 import pe.edu.upc.center.platform.iam.interfaces.rest.transform.RoleResourceFromEntityAssembler;
-
-import java.util.List;
 
 /**
  *  Roles Controller
@@ -37,7 +36,9 @@ public class RolesController {
   public ResponseEntity<List<RoleResource>> getAllRoles() {
     var getAllRolesQuery = new GetAllRolesQuery();
     var roles = roleQueryService.handle(getAllRolesQuery);
-    var roleResources = roles.stream().map(RoleResourceFromEntityAssembler::toResourceFromEntity).toList();
+    var roleResources = roles.stream()
+        .map(RoleResourceFromEntityAssembler::toResourceFromEntity)
+        .toList();
     return ResponseEntity.ok(roleResources);
   }
 }

@@ -28,10 +28,11 @@ public class RoleCommandServiceImpl implements RoleCommandService {
    */
   @Override
   public void handle(SeedRolesCommand command) {
-    Arrays.stream(Roles.values()).forEach(role -> {
-      if(!roleRepository.existsByName(role)) {
-        roleRepository.save(new Role(Roles.valueOf(role.name())));
-      }
-    } );
+    Arrays.stream(Roles.values())
+        .forEach(role -> {
+          if(!roleRepository.existsByName(role)) {
+            roleRepository.save(new Role(Roles.valueOf(role.name())));
+          }
+        } );
   }
 }

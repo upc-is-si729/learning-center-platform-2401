@@ -32,7 +32,6 @@ public class TokenServiceImpl implements BearerTokenService {
 
   private static final int TOKEN_BEGIN_INDEX = 7;
 
-
   @Value("${authorization.jwt.secret}")
   private String secret;
 
@@ -70,11 +69,11 @@ public class TokenServiceImpl implements BearerTokenService {
     var expiration = DateUtils.addDays(issuedAt, expirationDays);
     var key = getSigningKey();
     return Jwts.builder()
-            .subject(username)
-            .issuedAt(issuedAt)
-            .expiration(expiration)
-            .signWith(key)
-            .compact();
+        .subject(username)
+        .issuedAt(issuedAt)
+        .expiration(expiration)
+        .signWith(key)
+        .compact();
   }
 
   /**
@@ -130,7 +129,11 @@ public class TokenServiceImpl implements BearerTokenService {
    * @return Claims the claims
    */
   private Claims extractAllClaims(String token) {
-    return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
+    return Jwts.parser()
+        .verifyWith(getSigningKey())
+        .build()
+        .parseSignedClaims(token)
+        .getPayload();
   }
 
   /**
@@ -161,7 +164,8 @@ public class TokenServiceImpl implements BearerTokenService {
   @Override
   public String getBearerTokenFrom(HttpServletRequest request) {
     String parameter = getAuthorizationParameterFrom(request);
-    if (isTokenPresentIn(parameter) && isBearerTokenIn(parameter)) return extractTokenFrom(parameter);
+    if (isTokenPresentIn(parameter) && isBearerTokenIn(parameter))
+      return extractTokenFrom(parameter);
     return null;
   }
 }
